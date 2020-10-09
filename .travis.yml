@@ -20,4 +20,4 @@ deploy:
   provider: script
   script: echo "WIP"
   on:
-    all_branch: true
+    all_branches: true
