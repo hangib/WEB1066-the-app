@@ -3,19 +3,19 @@ dist: trusty
 jdk: oraclejdk8
 
 env:
-  - COVERAGE=0.5 TARGET=/monolithc/ui
-  - COVERAGE=0.5 TARGET=/monolithc/service/cart
-  - COVERAGE=0.5 TARGET=/monolithc/service/user
-  - COVERAGE=0.5 TARGET=/monolithc/repository/order
-  - COVERAGE=0.5 TARGET=/monolithc/repository/cart
-  - COVERAGE=0.5 TARGET=/monolithc/repository/product
-  - COVERAGE=0.5 TARGET=/monolithc/repository/user
+  - COVERAGE=0.5 TARGET=/monolithic/ui
+  - COVERAGE=0.5 TARGET=/monolithic/service/cart
+  - COVERAGE=0.5 TARGET=/monolithic/service/user
+  - COVERAGE=0.5 TARGET=/monolithic/repository/order
+  - COVERAGE=0.5 TARGET=/monolithic/repository/cart
+  - COVERAGE=0.5 TARGET=/monolithic/repository/product
+  - COVERAGE=0.5 TARGET=/monolithic/repository/user
 
 install:
   - ./gradlew clean jar
 
 script:
-  - COVERAGE=${COVERAGE} ./gradlew -p .${TARGET} check
+  - COVERAGE=${COVERAGE} ./gradlew -p .i${TARGET} check
 
 after_success:
   - find . -name jacocoTestReport.csv | xargs cat | awk -F',' '{print $3" "$4" "$5}'
