@@ -1,8 +1,10 @@
 language: java
-jdk: oraclejdk9
+dist: trusty
+jdk: oraclejdk8
 
 install:
   - ./gradlew clean jar
 
 script:
-  - echo "Testing coming soon"
+#  - echo "Testing coming soon"
+  - ./gradlew test
