@@ -34,4 +34,4 @@ deploy:
   script: ./gradlew -p .${TARGET} packageToContainer && bash ./script/deploy.sh
   on:
     branch: DOJO-SPIKE-AUTOMATION
-    condition: TARGET = /monolithic/ui
+    condition: $TARGET = /monolithic/ui
