@@ -1,18 +1,25 @@
+sudo: required
+services:
+  - docker
+
 language: java
 dist: trusty
 jdk: oraclejdk8
 
 env:
+  matrix:
   - COVERAGE=0.5 TARGET=/monolithic/ui
-  - COVERAGE=0.5 TARGET=/monolithic/service/cart
-  - COVERAGE=0.5 TARGET=/monolithic/service/user
-  - COVERAGE=0.3 TARGET=/monolithic/repository/order
-  - COVERAGE=0.5 TARGET=/monolithic/repository/cart
-  - COVERAGE=0.5 TARGET=/monolithic/repository/product
-  - COVERAGE=0.3 TARGET=/monolithic/repository/user
+#  - COVERAGE=0.5 TARGET=/monolithic/service/cart
+#  - COVERAGE=0.5 TARGET=/monolithic/service/user
+#  - COVERAGE=0.3 TARGET=/monolithic/repository/order
+#  - COVERAGE=0.5 TARGET=/monolithic/repository/cart
+#  - COVERAGE=0.5 TARGET=/monolithic/repository/product
+#  - COVERAGE=0.3 TARGET=/monolithic/repository/user
+  global:
+    secure: U/xsqFpiCNFK/qGcN36ut4ybr+I5d4EKQ3Sl+U8S67jrtOK5ai+QQEZCsiwYlty/Q8smQ11lDSwruGJN+JZxouvsNO8gEuZhQ5/L205/TXVseP8cUzDtciWQxLxby/bvSpOsFQM9LtfZCiWSzWhQK03CPVaT7HXyGByhd45bKdEiVQHbKW4HmTZz52XKQB5qYmIBIA94lWoQjXUcm8Ju2iA5YmwitDuKI4aTxha25i/Mj8LbNA4FoWy96k2ihYhCU6unQZPmv56ButPrOERq9GYoo5lshldrpVnvVCfFT9n9kXnZKz7GIqwmzzpmvt24B4r21sk57nTG1Wdysmxy8HRKChGiPQTREyihwKODMe7HicsQwHlqVLEV0jTNe+lzVqEYjYb+bk1htRALeXHDrAp/v0Cx1s3VyY/O/I18nyG+HK70O4voCFyjc2ZqITWNpDDhtvje3tfSnC3SMXUhks+GKUpWfFJrVIz7himcNkKKBKN3f/CYq81yyGZ8Aj6wkCJfhq9SzE1tukExLH0imZoS19LPfOX/swjFANb6k//SlJMVkakyK5o0leJUJWTHkpiDMAxz7lYARyJydG8caVJobxrAbRVmam4Z0a9oQM/1qv5Jrz01PdDyv81EfdUG8GdZ1ASiowOKSMOwYcvHVw8dMYbaxyHgVpALQLu3Sa8=
 
 install:
-  - ./gradlew clean jar
+  - "./gradlew clean jar"
 
 script:
   - COVERAGE=${COVERAGE} ./gradlew -p .${TARGET} check
@@ -22,6 +29,6 @@ after_success:
 
 deploy:
   provider: script
-  script: echo "WIP"
+  script: bash -c "echo \"${DOCKER_PASSWORD}\" | docker login --username \"${DOCKER_LOGIN}\" --password-stdin"
   on:
     all_branches: true
