@@ -36,5 +36,5 @@ deploy:
   provider: script
   script: bash ./script/deploy.sh
   on:
-    branch: DOJO-SPIKE-AUTOMATION
+    branch: master
     condition: $TARGET = /monolithic/ui
