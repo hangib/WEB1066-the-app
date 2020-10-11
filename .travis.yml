@@ -10,7 +10,7 @@ jdk: oraclejdk8
 env:
   matrix:
     - COVERAGE=0.5 TARGET=/monolithic/ui
-#    - COVERAGE=0.5 TARGET=/monolithic/service/cart
+##    - COVERAGE=0.5 TARGET=/monolithic/service/cart
 #    - COVERAGE=0.5 TARGET=/monolithic/service/user
 #    - COVERAGE=0.3 TARGET=/monolithic/repository/order
 #    - COVERAGE=0.5 TARGET=/monolithic/repository/cart
